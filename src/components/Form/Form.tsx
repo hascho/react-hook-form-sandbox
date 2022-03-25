@@ -6,6 +6,10 @@ import { Button, TextField } from "@mui/material";
 import { schema } from "./Form.schema";
 import type { FormState } from "./Form.types";
 
+const defaultValues: FormState = {
+  firstName: ""
+};
+
 export const Form = () => {
   const onSubmit: SubmitHandler<FormState> = (data) => {
     console.log(data);
@@ -16,6 +20,7 @@ export const Form = () => {
     handleSubmit,
     formState: { errors }
   } = useForm<FormState>({
+    defaultValues,
     resolver: yupResolver(schema)
   });
 
