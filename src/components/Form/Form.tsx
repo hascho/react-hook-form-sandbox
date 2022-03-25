@@ -29,6 +29,7 @@ export const Form = () => {
       <p>form</p>
       <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <Controller
+          name="firstName"
           control={control}
           render={({ field }) => (
             <TextField
@@ -38,7 +39,6 @@ export const Form = () => {
               helperText={errors.firstName ? errors.firstName?.message : ""}
             />
           )}
-          name="firstName"
         />
         <Button onClick={handleSubmit(onSubmit)} variant="contained">
           Submit
