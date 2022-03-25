@@ -1,7 +1,7 @@
 import { useForm, Controller } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
 import { schema } from "./Form.schema";
 import type { FormState } from "./Form.types";
@@ -11,17 +11,32 @@ export const Form = () => {
     console.log(data);
   };
 
-  const { control, handleSubmit } = useForm<FormState>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormState>({
     resolver: yupResolver(schema)
   });
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form>
       <p>form</p>
       <Controller
         control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            id={field.name}
+            error={!!errors.firstName}
+            helperText={errors.firstName ? errors.firstName?.message : ""}
+          />
+        )}
         name="firstName"
-        render={({ field }) => <TextField id="firstName" {...field} />}
       />
+      <Button onClick={handleSubmit(onSubmit)} variant="contained">
+        Submit
+      </Button>
     </form>
   );
 };
