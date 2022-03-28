@@ -1,5 +1,15 @@
 import { string, object } from "yup";
 
 export const schema = object({
-  firstName: string().min(2).required()
+  name: string()
+    .min(2)
+    .max(100)
+    .matches(RegExp(/[\p{L} .-]+/gu), "incorrect format")
+    .required(),
+  address: string().required(),
+  postcode: string().optional(),
+  telephone: string()
+    .max(30)
+    .matches(RegExp(/[\d +-]+/g), "incorrect format")
+    .required()
 });
