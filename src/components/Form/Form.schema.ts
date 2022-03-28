@@ -8,6 +8,7 @@ export const schema = object({
     .required(),
   address: string().required(),
   postcode: string().optional(),
+  country: string().required(),
   telephone: string()
     .max(30)
     .matches(RegExp(/[\d +-]+/g), "incorrect format")
